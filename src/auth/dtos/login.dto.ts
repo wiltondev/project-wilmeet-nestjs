@@ -1,0 +1,13 @@
+/* eslint-disable prettier/prettier */
+import { IsEmail, IsNotEmpty } from "class-validator";
+import { MessagesHelper } from "../helper/messages.helper";
+
+
+export class LoginDto {
+    @IsEmail({}, { message: MessagesHelper.AUTH_LOGIN_NOT_FOUND })
+    login: string;
+
+    @IsNotEmpty({ message: MessagesHelper.AUTH_PASSWORD_NOT_FOUND })
+    password: string;
+}
+// (DTO) objeto de transferência de dados 
