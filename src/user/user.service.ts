@@ -32,4 +32,24 @@ export class UserService {
     }
     return false; // Se nenhum usuário for encontrado, retorna falso.
   }
+
+  async getUserByLoginPassword(
+    email: string,
+    password: string,
+  ): Promise<UserDocument | null> {
+    const user = (await this.userModel.findOne({ email })) as UserDocument;
+
+    if (user) {
+      const bytes = CryptoJS.AES.decrypt(
+        user.password,
+        process.env.USER_CYPHER_SECRET_KEY,
+      );
+      const savedPassword = bytes.toString(CryptoJS.enc.Utf8);
+
+      if (password === savedPassword) {
+        return user;
+      }
+    }
+    return null;
+  }
 }
