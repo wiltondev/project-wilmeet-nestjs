@@ -1,19 +1,29 @@
-/* eslint-disable prettier/prettier */
-import {IsEmail, MinLength, MaxLength,  IsString, Matches} from "class-validator";
-import { UserMessagesHelper } from "../helpers/messages.helper";
+import {
+  IsEmail,
+  IsNotEmpty,
+  MinLength,
+  MaxLength,
+  Matches,
+  IsString,
+} from 'class-validator';
+import { MessagesHelper } from '../../auth/helper/messages.helper';
 
 export class RegisterDto {
-  @MinLength(2, { message: UserMessagesHelper.REGISTER_NAME_NOT_VALID })
-    name: string;
+  @IsEmail({}, { message: MessagesHelper.AUTH_LOGIN_NOT_FOUND })
+  email: string;
 
-    @IsEmail({}, {message: UserMessagesHelper.REGISTER_EMAIL_NOT_VALID })
-    email: string;
+  @IsNotEmpty({ message: MessagesHelper.AUTH_PASSWORD_NOT_FOUND })
+  @MinLength(4, { message: MessagesHelper.REGISTER_STRONG_PASSWORD })
+  @MaxLength(20, { message: MessagesHelper.REGISTER_STRONG_PASSWORD })
+  @Matches(/((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/, {
+    message: MessagesHelper.REGISTER_STRONG_PASSWORD,
+  })
+  password: string;
 
-    @MinLength(4, { message: UserMessagesHelper.REGISTER_PASSWORD_NOT_VALID })
-    @MaxLength(12, { message: UserMessagesHelper.REGISTER_PASSWORD_NOT_VALID })
-    @Matches(/((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/, { message: UserMessagesHelper.REGISTER_PASSWORD_NOT_VALID })
-    password: string;
+  @IsNotEmpty({ message: MessagesHelper.REGISTER_NAME_NOT_FOUND })
+  @MinLength(2, { message: MessagesHelper.REGISTER_NAME_NOT_FOUND })
+  name: string;
 
-    @IsString()
-    avatar: string;
+  @IsString()
+  avatar: string;
 }
