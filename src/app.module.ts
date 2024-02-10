@@ -4,15 +4,23 @@ import { AuthModule } from './auth/auth.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule } from '@nestjs/config';
 import { UserModule } from './user/user.module';
+import { JwtAuthGuard } from './auth/guards/jwt.guard';
+import { APP_GUARD } from '@nestjs/core';
 
 @Module({
   imports:[
     ConfigModule.forRoot(),
     MongooseModule.forRoot(process.env.DATABASE_URL), 
     AuthModule,
+    UserModule
 
   ],
   controllers: [],
-  providers: [],
+  providers: [
+    {
+      provide:APP_GUARD,
+      useClass: JwtAuthGuard,
+    }
+  ],
 })
 export class AppModule { }
