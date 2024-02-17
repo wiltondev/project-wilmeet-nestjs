@@ -30,7 +30,7 @@ export class AuthService {
 
     const tokenPayload = {
       email: user.email,
-      userId: user._id,
+      sub: user._id,
     };
     return {
       email: user.email,
