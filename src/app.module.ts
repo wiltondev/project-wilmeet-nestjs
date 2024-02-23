@@ -6,13 +6,15 @@ import { ConfigModule } from '@nestjs/config';
 import { UserModule } from './user/user.module';
 import { JwtAuthGuard } from './auth/guards/jwt.guard';
 import { APP_GUARD } from '@nestjs/core';
+import { MeetModule } from './meet/meet.module';
 
 @Module({
   imports:[
     ConfigModule.forRoot(),
     MongooseModule.forRoot(process.env.DATABASE_URL), 
     UserModule,
-    AuthModule
+    AuthModule,
+    MeetModule
 
   ],
   controllers: [],
