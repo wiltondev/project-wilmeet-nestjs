@@ -7,7 +7,7 @@ export class CreateMeetDto {
   })
   name: string;
 
-  @Matches(/[0-9a-fA-F]{3, 6}/, {
+  @Matches(/[0-9A-fa-f]{3,6}/, {
     message: MeetMessagesHelper.CREATE_COLOR_NOT_VALID,
   })
   color: string;

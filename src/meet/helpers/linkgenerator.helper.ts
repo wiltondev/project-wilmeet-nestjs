@@ -1,4 +1,4 @@
-const chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+const chars = '0123456789abcdefghijklmnopqrstuvwxyz';
 const size = 12;
 
 export const generateLink = () => {

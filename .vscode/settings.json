@@ -1,9 +1,11 @@
 {
     "cSpell.words": [
+        "createmeet",
         "dtos",
         "Dtro",
         "getmeet",
         "ispublic",
+        "linkgenerator",
         "meetmessages",
         "rnum",
         "updateuser"
